@@ -20,7 +20,7 @@ cleanupOutdatedCaches();
 
 registerRoute(({ request }) => {
   console.log({ request });
-  return request.url.endsWith(".png");
+  return request.url.endsWith(".png") || request.url.endsWith(".wasm");
 }, new CacheFirst({ cacheName: "map" }));
 
 // to allow work offline
