@@ -9,6 +9,7 @@ import {
 } from "react";
 import type { MapContainerProps } from "react-leaflet";
 import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 export const MapBoundsUpdater = ({
   bounds,
@@ -92,7 +93,7 @@ export const Map = (
 
   return (
     <MapContainer
-      style={{ height: "100%", width: "100%", position: "relative", flex: 1 }}
+      className="w-full h-full"
       attributionControl={false}
       maxZoom={maxZoom}
       minZoom={1}
@@ -106,7 +107,7 @@ export const Map = (
     >
       <TileLayer
         {...tileLayerProps}
-        url="https://maps.dpdgroup.com/default/{z}/{x}/{y}.png"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {children}
       <MapRef ref={mapRef} />

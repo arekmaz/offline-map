@@ -32,7 +32,7 @@ RUN pnpm install --frozen-lockfile --prod=false
 COPY --link . .
 
 # Build application
-RUN pnpm run build
+RUN pnpm run run-build-sw
 
 # Remove development dependencies
 RUN pnpm prune --prod

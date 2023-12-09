@@ -55,7 +55,8 @@
     "react-router": "^6.19.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^6.19.0",
-    "serve": "^14.2.1"
+    "serve": "^14.2.1",
+    "workbox-strategies": "^7.0.0"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.4.11",

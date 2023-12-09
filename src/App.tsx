@@ -1,14 +1,13 @@
 import { Outlet } from "react-router-dom";
 import ReloadPrompt from "./ReloadPrompt";
-import "./App.css";
 
 function App() {
   // replaced dyanmicaly
   const date = "__DATE__";
 
   return (
-    <main className="App">
-      <div className="Home-built text-red-600">
+    <main className="App h-screen flex flex-col">
+      <div className="Home-built ">
         Built at:
         {date}
       </div>
