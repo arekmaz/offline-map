@@ -8,8 +8,17 @@ import {
   useState,
 } from "react";
 import type { MapContainerProps } from "react-leaflet";
-import { MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  useMap,
+  useMapEvents,
+  Marker,
+  Popup,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+
+export { Marker, Popup };
 
 export const MapBoundsUpdater = ({
   bounds,
@@ -108,6 +117,7 @@ export const Map = (
       <TileLayer
         {...tileLayerProps}
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        crossOrigin="anonymous"
       />
       {children}
       <MapRef ref={mapRef} />

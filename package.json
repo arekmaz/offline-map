@@ -48,6 +48,9 @@
     "test": "nr test-build-claims && nr test-build-sw-claims"
   },
   "dependencies": {
+    "@effect/schema": "^0.52.0",
+    "@evolu/react": "^3.0.1",
+    "effect": "2.0.0-next.59",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
