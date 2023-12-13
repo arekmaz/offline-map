@@ -1,51 +1,77 @@
-import { Map, MapEvents, Marker, Popup } from "../components/Map";
+import {
+  LeafletMap,
+  Map,
+  MapEvents,
+  MapRef,
+  Marker,
+  Popup,
+} from "../components/Map";
 import { useCreatePoint, useEvolu, useLocalPoints } from "../localDb";
 import { Effect, Either, Exit } from "effect";
 import { TreeFormatter } from "@effect/schema";
 import * as Evolu from "@evolu/react";
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import * as S from "@effect/schema/Schema";
 
 export default function MapPage() {
   const { points } = useLocalPoints();
 
+  const [isAddingPointsMode, setIsAddingPointsMode] = useState(false);
+
   const createPoint = useCreatePoint();
 
-  console.log({ points });
+  const mapRef = useRef<LeafletMap | null>(null);
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 flex flex-col">
       <div className="flex gap-2">
         <OwnerActions />
 
         <p>{points.length} points</p>
-      </div>
-      <Map>
-        <MapEvents
-          click={({ latlng: { lat, lng } }) => {
-            prompt(Evolu.NonEmptyString1000, "new point name", (name) => {
-              createPoint({ latitude: lat, longitude: lng, name }).pipe(
-                Either.match({
-                  onLeft: (error) => {
-                    alert(TreeFormatter.formatErrors(error.errors));
-                  },
-                  onRight: () => 0,
-                })
-              );
-            });
+
+        <button
+          onClick={() => {
+            setIsAddingPointsMode((a) => !a);
           }}
-        />
+        >
+          {isAddingPointsMode
+            ? "Dbl click to add point"
+            : "Enable adding points"}
+        </button>
+      </div>
+      <div className="flex-1">
+        <Map doubleClickZoom={!isAddingPointsMode}>
+          <MapRef ref={mapRef} />
+          <MapEvents
+            dblclick={({ latlng: { lat, lng } }) => {
+              if (!isAddingPointsMode) {
+                return;
+              }
 
-        {points.map((point) => {
-          const { id, latitude, longitude, name } = point;
+              prompt(Evolu.NonEmptyString1000, "new point name", (name) => {
+                createPoint({ latitude: lat, longitude: lng, name }).pipe(
+                  Either.match({
+                    onLeft: (error) => {
+                      alert(TreeFormatter.formatErrors(error.errors));
+                    },
+                    onRight: () => 0,
+                  })
+                );
+              });
+            }}
+          />
 
-          return (
-            <Marker key={id} position={{ lat: latitude, lng: longitude }}>
-              <Popup>{name}</Popup>
-            </Marker>
-          );
-        })}
-      </Map>
+          {points.map((point) => {
+            const { id, latitude, longitude, name } = point;
+
+            return (
+              <Marker key={id} position={{ lat: latitude, lng: longitude }}>
+                <Popup>{name}</Popup>
+              </Marker>
+            );
+          })}
+        </Map>
+      </div>
     </div>
   );
 }

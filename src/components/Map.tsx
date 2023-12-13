@@ -22,7 +22,7 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-export { Marker, Popup };
+export { Marker, Popup, LeafletMap };
 
 export const MapBoundsUpdater = ({
   bounds,
@@ -86,7 +86,7 @@ export const Map = (
   const {
     children,
     center = [48.8308228, 2.2765887],
-    zoom = 18,
+    zoom = 3,
     maxZoom = 18,
     tileLayerProps,
     onMapReady,
@@ -109,7 +109,12 @@ export const Map = (
       className="w-full h-full"
       attributionControl={false}
       maxZoom={maxZoom}
-      minZoom={1}
+      minZoom={2}
+      maxBounds={[
+        [90, -180],
+        [-90, 180],
+      ]}
+      maxBoundsViscosity={1}
       center={center}
       zoom={zoom}
       whenReady={() => {

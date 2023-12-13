@@ -6,8 +6,8 @@ function App() {
   const date = "__DATE__";
 
   return (
-    <main className="App h-screen flex flex-col">
-      <div className="Home-built ">
+    <main className="h-screen flex flex-col overflow-hidden">
+      <div>
         Built at:
         {date}
       </div>
