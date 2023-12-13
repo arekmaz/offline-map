@@ -18,10 +18,8 @@ precacheAndRoute(self.__WB_MANIFEST);
 // clean old assets
 cleanupOutdatedCaches();
 
-registerRoute(({ request }) => {
-  console.log({ request });
-  return request.url.endsWith(".png") || request.url.endsWith(".wasm");
-}, new CacheFirst({ cacheName: "map" }));
+registerRoute(/openstreetmap.*\.png$/, new CacheFirst({ cacheName: "map" }));
+registerRoute(/\.wasm$/, new CacheFirst({ cacheName: "sqlite" }));
 
 // to allow work offline
 registerRoute(new NavigationRoute(createHandlerBoundToURL("index.html")));

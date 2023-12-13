@@ -1,4 +1,8 @@
-import type { LeafletEventHandlerFnMap, Map as LeafletMap } from "leaflet";
+import {
+  LeafletEventHandlerFnMap,
+  Map as LeafletMap,
+  tileLayer,
+} from "leaflet";
 import type { ComponentProps, ReactNode } from "react";
 import {
   forwardRef,
