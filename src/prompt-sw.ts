@@ -18,8 +18,11 @@ precacheAndRoute(self.__WB_MANIFEST);
 // clean old assets
 cleanupOutdatedCaches();
 
-registerRoute(/openstreetmap.*\.png$/, new CacheFirst({ cacheName: "map" }));
-registerRoute(/\.wasm$/, new CacheFirst({ cacheName: "sqlite" }));
+registerRoute(
+  /(?:openstreetmap|nginx-cache\.fly\.dev).*\.png$/,
+  new CacheFirst({ cacheName: "map-tiles" })
+);
+registerRoute(/\.(?:wasm|png)$/, new CacheFirst({ cacheName: "map-assets" }));
 
 // to allow work offline
 registerRoute(new NavigationRoute(createHandlerBoundToURL("index.html")));
