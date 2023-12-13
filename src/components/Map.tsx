@@ -120,7 +120,8 @@ export const Map = (
     >
       <TileLayer
         {...tileLayerProps}
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://nginx-cache.fly.dev/{s}/{z}/{x}/{y}.png"
+        // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         crossOrigin="anonymous"
       />
       {children}
