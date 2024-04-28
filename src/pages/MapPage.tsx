@@ -130,7 +130,24 @@ function TopMenu() {
   };
 
   return (
-    <Menu positioning={{ shift: 32 }}>
+    <Menu
+      positioning={{ shift: 32 }}
+      onSelect={(a) => {
+        if (a.value === "sync") {
+          evolu.sync();
+          return;
+        }
+        if (a.value === "restore") {
+          handleRestoreOwnerClick();
+          return;
+        }
+        if (a.value === "reset") {
+          handleResetOwnerClick();
+          return;
+        }
+      }}
+      closeOnSelect={false}
+    >
       <Menu.Trigger asChild>
         <button className="bg-white py-2 px-1 rounded-sm">
           <IconDotsVertical />
@@ -173,7 +190,9 @@ function TopMenu() {
                             />
                           </Clipboard.Input>
                           <Clipboard.Trigger>
-                            <Clipboard.Indicator copied={<IconCopyPlus />}>
+                            <Clipboard.Indicator
+                              copied={<IconCopyPlus className="!size-10" />}
+                            >
                               <IconCopy className="!size-10" />
                             </Clipboard.Indicator>
                           </Clipboard.Trigger>
@@ -196,15 +215,9 @@ function TopMenu() {
             <Menu.Item id="about" asChild>
               <a target="_blank">About</a>
             </Menu.Item>
-            <Menu.Item id="sync" asChild>
-              <button onClick={() => evolu.sync()}>Sync data</button>
-            </Menu.Item>
-            <Menu.Item id="restore" asChild>
-              <button onClick={handleRestoreOwnerClick}>Restore owner</button>
-            </Menu.Item>
-            <Menu.Item id="reset" asChild>
-              <button onClick={handleResetOwnerClick}>Reset Owner</button>
-            </Menu.Item>
+            <Menu.Item id="sync">Sync data</Menu.Item>
+            <Menu.Item id="restore">Restore owner</Menu.Item>
+            <Menu.Item id="reset">Reset Owner</Menu.Item>
           </Menu.ItemGroup>
         </Menu.Content>
       </Menu.Positioner>
