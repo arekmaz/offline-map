@@ -3,7 +3,7 @@ import {
   createHandlerBoundToURL,
   precacheAndRoute,
 } from "workbox-precaching";
-import { NavigationRoute, registerRoute, Route } from "workbox-routing";
+import { NavigationRoute, registerRoute } from "workbox-routing";
 import { CacheFirst } from "workbox-strategies";
 
 declare let self: ServiceWorkerGlobalScope;

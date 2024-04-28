@@ -65,7 +65,7 @@ export default function MapPage() {
             const { id, latitude, longitude, name } = point;
 
             return (
-              <Marker key={id} position={{ lat: latitude, lng: longitude }}>
+              <Marker key={id} position={{ lat: Number(latitude), lng: Number(longitude) }}>
                 <Popup>{name}</Popup>
               </Marker>
             );
