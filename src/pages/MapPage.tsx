@@ -13,8 +13,9 @@ import * as Evolu from "@evolu/react";
 import { FC, useRef, useState } from "react";
 import * as S from "@effect/schema/Schema";
 import { Menu } from "../components/ui/Menu";
-import { IconDotsVertical } from "@tabler/icons-react";
+import { IconDotsVertical, IconCopy, IconCopyPlus } from "@tabler/icons-react";
 import { cn } from "../components/utils/cn";
+import { Clipboard } from "@ark-ui/react";
 
 export default function MapPage() {
   const { points } = useLocalPoints();
@@ -73,65 +74,6 @@ export default function MapPage() {
     </div>
   );
 }
-
-const OwnerActions: FC = () => {
-  const evolu = useEvolu();
-  const owner = Evolu.useOwner();
-
-  console.log({ owner, o: evolu.getOwner() });
-  const [showMnemonic, setShowMnemonic] = useState(false);
-
-  const handleRestoreOwnerClick = (): void => {
-    prompt(Evolu.NonEmptyString1000, "Your Mnemonic", (mnemonic) => {
-      Evolu.parseMnemonic(mnemonic)
-        .pipe(Effect.runPromiseExit)
-        .then(
-          Exit.match({
-            onFailure: (error) => {
-              alert(JSON.stringify(error, null, 2));
-            },
-            onSuccess: (mnemonic) => {
-              isRestoringOwner(true);
-              evolu.restoreOwner(mnemonic);
-            },
-          }),
-        );
-    });
-  };
-
-  const handleResetOwnerClick = (): void => {
-    if (confirm("Are you sure? It will delete all your local data.")) {
-      isRestoringOwner(false);
-      evolu.resetOwner();
-    }
-  };
-
-  return (
-    <div className="flex gap-2 flex-col">
-      <div className="flex gap-1 items-start p-3 justify-evenly">
-        <div className="flex flex-col gap-1">
-          <button onClick={(): void => setShowMnemonic(!showMnemonic)}>{`${
-            showMnemonic ? "Hide" : "Show"
-          } Mnemonic`}</button>
-          {showMnemonic && owner != null && (
-            <div>
-              <textarea
-                value={owner.mnemonic}
-                readOnly
-                rows={2}
-                style={{ width: "320px" }}
-              />
-            </div>
-          )}
-        </div>
-
-        <button onClick={handleRestoreOwnerClick}>restore owner</button>
-        <button onClick={handleResetOwnerClick}>Reset Owner</button>
-        <button onClick={() => evolu.sync()}>sync data</button>
-      </div>
-    </div>
-  );
-};
 
 const prompt = <From extends string, To>(
   schema: S.Schema<From, To>,
@@ -205,22 +147,51 @@ function TopMenu() {
 
             <Menu.Separator />
 
-            <Menu.Item id="mnemonic" className={cn(showMnemonic && "h-auto")}>
-              <div className="flex flex-col gap-1">
+            <Menu.Item
+              id="mnemonic"
+              className={cn(showMnemonic && "h-20")}
+              asChild
+            >
+              {showMnemonic ? (
+                <div className="flex flex-col gap-1">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      setShowMnemonic(false);
+                    }}
+                    className="w-full py-1"
+                  >{`Hide Mnemonic`}</button>
+                  {showMnemonic && owner != null && (
+                    <div>
+                      <Clipboard.Root value={owner.mnemonic}>
+                        <Clipboard.Control>
+                          <Clipboard.Input asChild>
+                            <textarea
+                              readOnly
+                              rows={2}
+                              style={{ width: "320px" }}
+                            />
+                          </Clipboard.Input>
+                          <Clipboard.Trigger>
+                            <Clipboard.Indicator copied={<IconCopyPlus />}>
+                              <IconCopy className="!size-10" />
+                            </Clipboard.Indicator>
+                          </Clipboard.Trigger>
+                        </Clipboard.Control>
+                      </Clipboard.Root>
+                    </div>
+                  )}
+                </div>
+              ) : (
                 <button
-                  onClick={(): void => setShowMnemonic(!showMnemonic)}
-                >{`${showMnemonic ? "Hide" : "Show"} Mnemonic`}</button>
-                {showMnemonic && owner != null && (
-                  <div>
-                    <textarea
-                      value={owner.mnemonic}
-                      readOnly
-                      rows={2}
-                      style={{ width: "320px" }}
-                    />
-                  </div>
-                )}
-              </div>
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    setShowMnemonic(true);
+                  }}
+                >{`Show Mnemonic`}</button>
+              )}
             </Menu.Item>
 
             <Menu.Item id="about" asChild>
