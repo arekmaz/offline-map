@@ -13,10 +13,10 @@ importers:
         version: 2.2.3(@internationalized/date@3.5.2)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@effect/schema':
         specifier: ^0.52.0
-        version: 0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0)
+        version: 0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0)
       '@evolu/react':
         specifier: ^3.0.1
-        version: 3.0.1(@evolu/common-react@3.0.1(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@types/react@18.2.42)(react@18.2.0))(@evolu/common-web@3.0.2(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@sqlite.org/sqlite-wasm@3.43.2-build1))(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@types/react-dom@18.2.17)(react-dom@18.2.0(react@18.2.0))
+        version: 3.0.1(@evolu/common-react@3.0.1(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@types/react@18.2.42)(react@18.2.0))(@evolu/common-web@3.0.2(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@sqlite.org/sqlite-wasm@3.43.2-build1))(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@types/react-dom@18.2.17)(react-dom@18.2.0(react@18.2.0))
       '@tabler/icons-react':
         specifier: ^3.2.0
         version: 3.2.0(react@18.2.0)
@@ -24,8 +24,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       effect:
-        specifier: 2.0.0-next.59
-        version: 2.0.0-next.59
+        specifier: 2.0.0-next.58
+        version: 2.0.0-next.58
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -1851,8 +1851,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  effect@2.0.0-next.59:
-    resolution: {integrity: sha512-EE87vFl0/zIN5lKDtFccU3YCnbPqjxg9rY72obNN65/GE4JOJsXciyX8XC4pIDr3lE6KeJ0le8IXf+A7d92ntQ==}
+  effect@2.0.0-next.58:
+    resolution: {integrity: sha512-3JtlhJWIZlKe2krJp8ZsKCWCsKMemRVMNOGKtW6bLbg1ZYDi9riuDO44heqEyh7mVBhGsLh/Ut+Hz4olFbfhyg==}
 
   ejs@3.1.10:
     resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
@@ -4240,9 +4240,9 @@ snapshots:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  '@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0)':
+  '@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0)':
     dependencies:
-      effect: 2.0.0-next.59
+      effect: 2.0.0-next.58
       fast-check: 3.14.0
 
   '@esbuild/android-arm64@0.19.8':
@@ -4311,33 +4311,33 @@ snapshots:
   '@esbuild/win32-x64@0.19.8':
     optional: true
 
-  '@evolu/common-react@3.0.1(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@types/react@18.2.42)(react@18.2.0)':
+  '@evolu/common-react@3.0.1(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@types/react@18.2.42)(react@18.2.0)':
     dependencies:
-      '@evolu/common': 2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59)
+      '@evolu/common': 2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58)
       '@types/react': 18.2.42
       react: 18.2.0
 
-  '@evolu/common-web@3.0.2(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@sqlite.org/sqlite-wasm@3.43.2-build1)':
+  '@evolu/common-web@3.0.2(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@sqlite.org/sqlite-wasm@3.43.2-build1)':
     dependencies:
-      '@evolu/common': 2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59)
+      '@evolu/common': 2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58)
       '@sqlite.org/sqlite-wasm': 3.43.2-build1
 
-  '@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59)':
+  '@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58)':
     dependencies:
-      '@effect/schema': 0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0)
+      '@effect/schema': 0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0)
       '@noble/ciphers': 0.4.1
       '@noble/hashes': 1.4.0
       '@protobuf-ts/runtime': 2.9.4
       '@scure/bip39': 1.3.0
-      effect: 2.0.0-next.59
+      effect: 2.0.0-next.58
       kysely: 0.26.3
       nanoid: 5.0.7
 
-  '@evolu/react@3.0.1(@evolu/common-react@3.0.1(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@types/react@18.2.42)(react@18.2.0))(@evolu/common-web@3.0.2(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@sqlite.org/sqlite-wasm@3.43.2-build1))(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@types/react-dom@18.2.17)(react-dom@18.2.0(react@18.2.0))':
+  '@evolu/react@3.0.1(@evolu/common-react@3.0.1(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@types/react@18.2.42)(react@18.2.0))(@evolu/common-web@3.0.2(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@sqlite.org/sqlite-wasm@3.43.2-build1))(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@types/react-dom@18.2.17)(react-dom@18.2.0(react@18.2.0))':
     dependencies:
-      '@evolu/common': 2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59)
-      '@evolu/common-react': 3.0.1(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@types/react@18.2.42)(react@18.2.0)
-      '@evolu/common-web': 3.0.2(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.59)(fast-check@3.14.0))(effect@2.0.0-next.59))(@sqlite.org/sqlite-wasm@3.43.2-build1)
+      '@evolu/common': 2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58)
+      '@evolu/common-react': 3.0.1(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@types/react@18.2.42)(react@18.2.0)
+      '@evolu/common-web': 3.0.2(@evolu/common@2.2.1(@effect/schema@0.52.0(effect@2.0.0-next.58)(fast-check@3.14.0))(effect@2.0.0-next.58))(@sqlite.org/sqlite-wasm@3.43.2-build1)
       '@types/react-dom': 18.2.17
       react-dom: 18.2.0(react@18.2.0)
 
@@ -5491,7 +5491,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  effect@2.0.0-next.59: {}
+  effect@2.0.0-next.58: {}
 
   ejs@3.1.10:
     dependencies:
