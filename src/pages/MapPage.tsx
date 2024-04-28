@@ -102,7 +102,6 @@ function TopMenu() {
   const evolu = useEvolu();
   const owner = Evolu.useOwner();
 
-  console.log({ owner, o: evolu.getOwner() });
   const [showMnemonic, setShowMnemonic] = useState(false);
 
   const handleRestoreOwnerClick = (): void => {
@@ -139,7 +138,7 @@ function TopMenu() {
       </Menu.Trigger>
 
       <Menu.Positioner>
-        <Menu.Content>
+        <Menu.Content className="cursor-pointer">
           <Menu.ItemGroup id="group-1">
             <Menu.ItemGroupLabel htmlFor="group-1">
               Offline MiniMap
