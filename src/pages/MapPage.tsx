@@ -16,38 +16,17 @@ import * as S from "@effect/schema/Schema";
 export default function MapPage() {
   const { points } = useLocalPoints();
 
-  const [isAddingPointsMode, setIsAddingPointsMode] = useState(false);
-
   const createPoint = useCreatePoint();
 
   const mapRef = useRef<LeafletMap | null>(null);
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="flex gap-2">
-        <OwnerActions />
-
-        <p>{points.length} points</p>
-
-        <button
-          onClick={() => {
-            setIsAddingPointsMode((a) => !a);
-          }}
-        >
-          {isAddingPointsMode
-            ? "Dbl click to add point"
-            : "Enable adding points"}
-        </button>
-      </div>
       <div className="flex-1">
-        <Map doubleClickZoom={!isAddingPointsMode}>
+        <Map>
           <MapRef ref={mapRef} />
           <MapEvents
-            dblclick={({ latlng: { lat, lng } }) => {
-              if (!isAddingPointsMode) {
-                return;
-              }
-
+            click={({ latlng: { lat, lng } }) => {
               prompt(Evolu.NonEmptyString1000, "new point name", (name) => {
                 createPoint({ latitude: lat, longitude: lng, name }).pipe(
                   Either.match({
@@ -65,7 +44,7 @@ export default function MapPage() {
             const { id, latitude, longitude, name } = point;
 
             return (
-              <Marker key={id} position={{ lat: Number(latitude), lng: Number(longitude) }}>
+              <Marker key={id} position={{ lat: Number(latitude), lng: Number(longitude) }} eventHandlers={{click: () => mapRef.current?.panTo({lat: Number(latitude), lng: Number(longitude)})}}>
                 <Popup>{name}</Popup>
               </Marker>
             );
@@ -110,11 +89,6 @@ const OwnerActions: FC = () => {
 
   return (
     <div className="flex gap-2 flex-col">
-      <p>
-        Open this page on a different device and use your mnemonic to restore
-        your data.
-      </p>
-
       <div className="flex gap-1 items-start p-3 justify-evenly">
         <div className="flex flex-col gap-1">
           <button onClick={(): void => setShowMnemonic(!showMnemonic)}>{`${
