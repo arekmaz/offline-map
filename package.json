@@ -48,8 +48,10 @@
     "test": "nr test-build-claims && nr test-build-sw-claims"
   },
   "dependencies": {
+    "@ark-ui/react": "^2.2.3",
     "@effect/schema": "^0.52.0",
     "@evolu/react": "^3.0.1",
+    "@tabler/icons-react": "^3.2.0",
     "effect": "2.0.0-next.59",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
@@ -64,6 +66,7 @@
   "devDependencies": {
     "@flydotio/dockerfile": "^0.4.11",
     "@rollup/plugin-replace": "^5.0.5",
+    "@savvywombat/tailwindcss-grid-areas": "^4.0.0",
     "@types/leaflet": "^1.9.8",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
@@ -75,7 +78,9 @@
     "nr": "^0.1.0",
     "postcss": "^8.4.32",
     "rimraf": "^5.0.5",
-    "tailwindcss": "^3.3.6",
+    "tailwind-plugin-variants": "^1.0.2",
+    "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vite-plugin-pwa": "^0.17.4",
