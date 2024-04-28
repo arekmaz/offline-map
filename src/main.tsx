@@ -6,9 +6,22 @@ import App from "./App";
 import Map from "./pages/MapPage";
 import { evolu } from "./localDb";
 import { Suspense } from "react";
+import { Progress } from "./components/ui/progress";
 
 createRoot(document.getElementById("app")!).render(
-  <Suspense fallback="loading...">
+  <Suspense
+    fallback={
+      <div className="h-screen w-screen flex items-center justify-center">
+        <Progress value={null} size="lg">
+          <Progress.Label>Loading, please wait…</Progress.Label>
+          <Progress.Circle>
+            <Progress.CircleTrack />
+            <Progress.CircleRange />
+          </Progress.Circle>
+        </Progress>
+      </div>
+    }
+  >
     <EvoluProvider value={evolu}>
       <BrowserRouter>
         <Routes>
@@ -19,5 +32,5 @@ createRoot(document.getElementById("app")!).render(
         </Routes>
       </BrowserRouter>
     </EvoluProvider>
-  </Suspense>
+  </Suspense>,
 );

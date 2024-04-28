@@ -12,6 +12,9 @@ import { TreeFormatter } from "@effect/schema";
 import * as Evolu from "@evolu/react";
 import { FC, useRef, useState } from "react";
 import * as S from "@effect/schema/Schema";
+import { Menu } from "../components/ui/Menu";
+import { IconDotsVertical } from "@tabler/icons-react";
+import { cn } from "../components/utils/cn";
 
 export default function MapPage() {
   const { points } = useLocalPoints();
@@ -22,7 +25,7 @@ export default function MapPage() {
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="flex-1">
+      <div className="flex-1 relative">
         <Map>
           <MapRef ref={mapRef} />
           <MapEvents
@@ -34,7 +37,7 @@ export default function MapPage() {
                       alert(TreeFormatter.formatErrors(error.errors));
                     },
                     onRight: () => 0,
-                  })
+                  }),
                 );
               });
             }}
@@ -44,12 +47,28 @@ export default function MapPage() {
             const { id, latitude, longitude, name } = point;
 
             return (
-              <Marker key={id} position={{ lat: Number(latitude), lng: Number(longitude) }} eventHandlers={{click: () => mapRef.current?.panTo({lat: Number(latitude), lng: Number(longitude)})}}>
+              <Marker
+                key={id}
+                position={{ lat: Number(latitude), lng: Number(longitude) }}
+                eventHandlers={{
+                  click: () =>
+                    mapRef.current?.panTo({
+                      lat: Number(latitude),
+                      lng: Number(longitude),
+                    }),
+                }}
+              >
                 <Popup>{name}</Popup>
               </Marker>
             );
           })}
         </Map>
+
+        <div className="absolute inset-0 pointer-events-none z-[401]">
+          <div className="pointer-events-auto absolute top-1 right-1">
+            <TopMenu />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -75,7 +94,7 @@ const OwnerActions: FC = () => {
               isRestoringOwner(true);
               evolu.restoreOwner(mnemonic);
             },
-          })
+          }),
         );
     });
   };
@@ -117,7 +136,7 @@ const OwnerActions: FC = () => {
 const prompt = <From extends string, To>(
   schema: S.Schema<From, To>,
   message: string,
-  onSuccess: (value: To) => void
+  onSuccess: (value: To) => void,
 ): void => {
   const value = window.prompt(message);
   if (value == null) return; // on cancel
@@ -136,3 +155,89 @@ const isRestoringOwner = (isRestoringOwner?: boolean): boolean => {
     localStorage.setItem(key, String(isRestoringOwner));
   return localStorage.getItem(key) === "true";
 };
+
+function TopMenu() {
+  const evolu = useEvolu();
+  const owner = Evolu.useOwner();
+
+  console.log({ owner, o: evolu.getOwner() });
+  const [showMnemonic, setShowMnemonic] = useState(false);
+
+  const handleRestoreOwnerClick = (): void => {
+    prompt(Evolu.NonEmptyString1000, "Your Mnemonic", (mnemonic) => {
+      Evolu.parseMnemonic(mnemonic)
+        .pipe(Effect.runPromiseExit)
+        .then(
+          Exit.match({
+            onFailure: (error) => {
+              alert(JSON.stringify(error, null, 2));
+            },
+            onSuccess: (mnemonic) => {
+              isRestoringOwner(true);
+              evolu.restoreOwner(mnemonic);
+            },
+          }),
+        );
+    });
+  };
+
+  const handleResetOwnerClick = (): void => {
+    if (confirm("Are you sure? It will delete all your local data.")) {
+      isRestoringOwner(false);
+      evolu.resetOwner();
+    }
+  };
+
+  return (
+    <Menu positioning={{ shift: 32 }}>
+      <Menu.Trigger asChild>
+        <button className="bg-white py-2 px-1 rounded-sm">
+          <IconDotsVertical />
+        </button>
+      </Menu.Trigger>
+
+      <Menu.Positioner>
+        <Menu.Content>
+          <Menu.ItemGroup id="group-1">
+            <Menu.ItemGroupLabel htmlFor="group-1">
+              Offline MiniMap
+            </Menu.ItemGroupLabel>
+
+            <Menu.Separator />
+
+            <Menu.Item id="mnemonic" className={cn(showMnemonic && "h-auto")}>
+              <div className="flex flex-col gap-1">
+                <button
+                  onClick={(): void => setShowMnemonic(!showMnemonic)}
+                >{`${showMnemonic ? "Hide" : "Show"} Mnemonic`}</button>
+                {showMnemonic && owner != null && (
+                  <div>
+                    <textarea
+                      value={owner.mnemonic}
+                      readOnly
+                      rows={2}
+                      style={{ width: "320px" }}
+                    />
+                  </div>
+                )}
+              </div>
+            </Menu.Item>
+
+            <Menu.Item id="about" asChild>
+              <a target="_blank">About</a>
+            </Menu.Item>
+            <Menu.Item id="sync" asChild>
+              <button onClick={() => evolu.sync()}>Sync data</button>
+            </Menu.Item>
+            <Menu.Item id="restore" asChild>
+              <button onClick={handleRestoreOwnerClick}>Restore owner</button>
+            </Menu.Item>
+            <Menu.Item id="reset" asChild>
+              <button onClick={handleResetOwnerClick}>Reset Owner</button>
+            </Menu.Item>
+          </Menu.ItemGroup>
+        </Menu.Content>
+      </Menu.Positioner>
+    </Menu>
+  );
+}
