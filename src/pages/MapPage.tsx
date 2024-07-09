@@ -213,7 +213,12 @@ function TopMenu() {
             </Menu.Item>
 
             <Menu.Item id="about" asChild>
-              <a target="_blank">About</a>
+              <a
+                target="_blank"
+                href="https://github.com/arekmaz/offline-map/blob/main/README.md"
+              >
+                About
+              </a>
             </Menu.Item>
             <Menu.Item id="sync">Sync data</Menu.Item>
             <Menu.Item id="restore">Restore owner</Menu.Item>
