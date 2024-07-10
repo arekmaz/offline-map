@@ -19,8 +19,9 @@ precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 registerRoute(
-  /(?:openstreetmap|nginx-cache\.fly\.dev).*\.png$/,
-  new CacheFirst({ cacheName: "map-tiles" })
+  /https:\/\/.+\.tile\.openstreetmap\.org\/.+\/.+\/.+\..+$/,
+  // /(?:openstreetmap|nginx-cache\.fly\.dev).*\.png$/,
+  new CacheFirst({ cacheName: "map-tiles" }),
 );
 registerRoute(/\.(?:wasm|png)$/, new CacheFirst({ cacheName: "map-assets" }));
 
