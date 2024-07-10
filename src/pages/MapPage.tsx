@@ -145,6 +145,14 @@ function TopMenu() {
           handleResetOwnerClick();
           return;
         }
+        if (a.value === "showMnemonic") {
+          setShowMnemonic(true);
+          return;
+        }
+        if (a.value === "hideMnemonic") {
+          setShowMnemonic(false);
+          return;
+        }
       }}
       closeOnSelect={false}
     >
@@ -163,54 +171,45 @@ function TopMenu() {
 
             <Menu.Separator />
 
-            <Menu.Item
-              id="mnemonic"
-              className={cn(showMnemonic && "h-20")}
-              asChild
-            >
-              {showMnemonic ? (
-                <div className="flex flex-col gap-1">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      setShowMnemonic(false);
-                    }}
-                    className="w-full py-1"
-                  >{`Hide Mnemonic`}</button>
-                  {showMnemonic && owner != null && (
-                    <div>
-                      <Clipboard.Root value={owner.mnemonic}>
-                        <Clipboard.Control>
-                          <Clipboard.Input asChild>
-                            <textarea
-                              readOnly
-                              rows={2}
-                              style={{ width: "320px" }}
-                            />
-                          </Clipboard.Input>
-                          <Clipboard.Trigger>
-                            <Clipboard.Indicator
-                              copied={<IconCopyPlus className="!size-10" />}
-                            >
-                              <IconCopy className="!size-10" />
-                            </Clipboard.Indicator>
-                          </Clipboard.Trigger>
-                        </Clipboard.Control>
-                      </Clipboard.Root>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    setShowMnemonic(true);
-                  }}
-                >{`Show Mnemonic`}</button>
-              )}
-            </Menu.Item>
+            {showMnemonic ? (
+              <div className="flex flex-col gap-1">
+                <Menu.Item
+                  id="hideMnemonic"
+                  className={cn(showMnemonic && "h-20")}
+                >
+                  Hide Mnemonic
+                </Menu.Item>
+                {showMnemonic && owner != null && (
+                  <div>
+                    <Clipboard.Root value={owner.mnemonic}>
+                      <Clipboard.Control>
+                        <Clipboard.Input asChild>
+                          <textarea
+                            readOnly
+                            rows={2}
+                            style={{ width: "320px" }}
+                          />
+                        </Clipboard.Input>
+                        <Clipboard.Trigger>
+                          <Clipboard.Indicator
+                            copied={<IconCopyPlus className="!size-10" />}
+                          >
+                            <IconCopy className="!size-10" />
+                          </Clipboard.Indicator>
+                        </Clipboard.Trigger>
+                      </Clipboard.Control>
+                    </Clipboard.Root>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Menu.Item
+                id="showMnemonic"
+                className={cn(showMnemonic && "h-20")}
+              >
+                Show Mnemonic
+              </Menu.Item>
+            )}
 
             <Menu.Item id="about" asChild>
               <a
